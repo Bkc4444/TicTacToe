@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">TicTacToe</string>
     <string name="new_game">New Game</string>
-    <string name="instructions">New text goes here</string>
-    <string name="topLeftBtn">X</string>
-    <string name="topMidBtn">O</string>
-    <string name="topRightBtn">X</string>
-    <string name="midLeftBtn">O</string>
-    <string name="midBtn">X</string>
-    <string name="midRightBtn">O</string>
-    <string name="botLeftBtn">X</string>
-    <string name="botMidBtn">O</string>
-    <string name="botRightBtn">X</string>
+    <string name="currPlayerTurn">Turn X</string>
+    <string name="topLeftBtn"></string>
+    <string name="topMidBtn"></string>
+    <string name="topRightBtn"></string>
+    <string name="midLeftBtn"></string>
+    <string name="midBtn"></string>
+    <string name="midRightBtn"></string>
+    <string name="botLeftBtn"></string>
+    <string name="botMidBtn"></string>
+    <string name="botRightBtn"></string>
 </resources>
