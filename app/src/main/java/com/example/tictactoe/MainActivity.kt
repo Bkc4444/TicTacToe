@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addToBoard(button: Button) {
         val draw = findViewById<TextView>(R.id.turnText)
-        
+
             if (button.text != "") {
                 draw.text = "Draw!"
                 return
