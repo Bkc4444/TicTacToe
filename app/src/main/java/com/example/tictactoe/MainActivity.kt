@@ -1,10 +1,10 @@
 package com.example.tictactoe
 
-import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import com.example.tictactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -51,13 +51,57 @@ class MainActivity : AppCompatActivity() {
             return
         addToBoard(view)
 
+        if(checkForVictory(NOUGHT)){
+            val winningText = findViewById<TextView>(R.id.turnText)
+            winningText.text = "$NOUGHT Wins!"
+
+        }
+        if(checkForVictory(CROSS)){
+            val winningText = findViewById<TextView>(R.id.turnText)
+            winningText.text = "$CROSS Wins!"
+        }
+
         newGameBtn.setOnClickListener{
-            if(fullBoard()){
                 resetBoard()
-            }
         }
     }
 
+    private fun checkForVictory(s: String): Boolean {
+        val match1 = match(binding.topLeft,s) && match(binding.topMid,s) && match(binding.topRight,s)
+        val match2 = match(binding.midLeft,s) && match(binding.mid,s) && match(binding.midRight,s)
+        val match3 = match(binding.botLeft,s) && match(binding.botMid,s) && match(binding.botRight,s)
+        val match4 = match(binding.topLeft,s) && match(binding.midLeft,s) && match(binding.botLeft,s)
+        val match5 = match(binding.topMid,s) && match(binding.mid,s) && match(binding.botMid,s)
+        val match6 = match(binding.topRight,s) && match(binding.midRight,s) && match(binding.botRight,s)
+        val match7 = match(binding.topLeft,s) && match(binding.mid,s) && match(binding.botRight,s)
+        val match8 = match(binding.topRight,s) && match(binding.mid,s) && match(binding.botLeft,s)
+
+        // Horizontal victories
+        if(match1)
+            return true
+        if(match2)
+            return true
+        if(match3)
+            return true
+
+        //Vertical victories
+        if(match4)
+            return true
+        if(match5)
+            return true
+        if(match6)
+            return true
+
+        //Diagonal victories
+        if(match7)
+            return true
+        if(match8)
+            return true
+
+        return false
+    }
+
+    private fun match(button: Button,symbol : String) = button.text == symbol
 
     private fun resetBoard() {
         for(button in boardList){
@@ -74,30 +118,22 @@ class MainActivity : AppCompatActivity() {
         setTurnLabel()
     }
 
-    private fun fullBoard(): Boolean {
-        for(button in boardList){
-            if(button.text == "") {
-                return false
+    private fun addToBoard(button: Button) {
+        val draw = findViewById<TextView>(R.id.turnText)
+        
+            if (button.text != "") {
+                draw.text = "Draw!"
+                return
             }
-        }
-        return true
+            if (currTurn == Turn.NOUGHT) {
+                button.text = NOUGHT
+                currTurn = Turn.CROSS
+            } else if (currTurn == Turn.CROSS) {
+                button.text = CROSS
+                currTurn = Turn.NOUGHT
+            }
+            setTurnLabel()
     }
-
-    private fun addToBoard(button: Button){
-        if(button.text != "") {
-            return
-        }
-        if(currTurn == Turn.NOUGHT) {
-            button.text = NOUGHT
-            currTurn = Turn.CROSS
-        }
-        else if(currTurn == Turn.CROSS) {
-            button.text = CROSS
-            currTurn = Turn.NOUGHT
-        }
-        setTurnLabel()
-    }
-
     private fun setTurnLabel() {
         var turnText = ""
         if(currTurn == Turn.CROSS){
